@@ -42,6 +42,7 @@ all(rownames(dmv) %in% rownames(cg_counts))
 
 
 
+
 ### family-based counts table
 tab <- cg_counts
 tab$Family <- 'Unassigned'
@@ -49,24 +50,11 @@ tab[rownames(dmv), 'Family'] <- dmv$Family_new
 
 fm_counts <- aggregate(.~Family, data = tab, FUN = sum)
 
-write.table(
-	fm_counts,
-	sep = '\t',
-	row.names = FALSE,
-	quote = FALSE,
-	file = 'Family_read_counts.txt'
-)
-
 rownames(fm_counts) <- fm_counts$Family
 fm_counts$Family <- NULL
 
 
-
-
-### plot coverage per family
 M <- t(as.matrix(fm_counts))
-
-
 rownames(M) <- sub('^GFD_', '', rownames(M))
 M <- M[order(as.numeric(rownames(M))), ]
 
@@ -82,6 +70,18 @@ identical(sort(fam_ord), colnames(M))
 M <- M[, fam_ord]
 
 
+write.table(
+	round(M, 2),
+	sep = '\t',
+	row.names = TRUE,
+	quote = FALSE,
+	file = 'Family_read_counts.txt'
+)
+
+
+
+
+### plot coverage per family
 fam_font <- ifelse(fam_ord %in% c('Tombus-like', 'CrAss-like', 'Unassigned'), 1, 3)
 
 
