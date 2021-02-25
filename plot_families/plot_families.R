@@ -1,5 +1,5 @@
 ### R libraries
-.libPaths('/groups/umcg-lld/tmp03/umcg-agulyaeva/R_LIB')
+.libPaths('/groups/umcg-tifn/tmp01/users/umcg-agulyaeva/SOFTWARE/R_LIB')
 library('optparse')
 sessionInfo()
 
@@ -8,7 +8,6 @@ sessionInfo()
 
 ### R functions
 source('function_plot_contigs_abundance.R')
-plot_contigs_abundance
 
 
 
@@ -97,7 +96,7 @@ plot_contigs_abundance(
 			M,
 			sample_space = 3,
             contig_font = fam_font,
-            brackets = c(0, 10^seq(1, 6, 0.1)),
+            brackets = c(0, 10^seq(0, 6, 0.1)),
 			brackets_lab = c(0, 10^seq(1, 6, 1))
 )
 
